@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# find waybar process ids
+BAR1=$(pgrep -fx "waybar")
+BAR2=$(pgrep -f "waybar -c /home/safwan/.config/hypr/waybar/config_mon_2")
+
+activeMonitor=$(hyprctl activeworkspace -j | jq -r '.monitor')
+
+if [[ "$activeMonitor" == "DP-3" ]] && [[ -n $BAR2 ]]; then
+    kill -SIGUSR1 "$BAR2"
+elif [[ "$activeMonitor" == "eDP-1" ]] && [[ -n $BAR1 ]]; then
+    kill -SIGUSR1 "$BAR1"
+fi

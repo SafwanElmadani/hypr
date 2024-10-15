@@ -1,0 +1,254 @@
+* {
+    /* `otf-font-awesome` is required to be installed for icons */
+    /*font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif; */
+    font-family: "JetBrainsMono Nerd Font", FontAwesome;
+    font-size: 16px;
+}
+
+window#waybar {
+    background-color: transparent;
+    /*border-bottom: 3px solid rgba(100, 114, 125, 0.5);*/
+    color: #fbf1c7;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+window > box {
+    /*background-color: rgba(60,56,54, 1);*/
+    background-color: transparent;
+    border-radius: 10px; /* All corners rounded */
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 5px;
+    /*margin-bottom: 10px; need to remove this have smaller top gas with windows*/
+    /*border: 2.7px solid rgba(138, 173, 244, 0.5);*/
+}
+
+
+.modules-left,
+.modules-right{
+    background-color: rgba(60,56,54, 1);
+    padding: 5px 5px;
+    border-radius: 10px; /* All corners rounded */
+}
+.modules-center{
+    background-color: rgba(60,56,54, 1);
+    padding: 5px 5px;
+    border-radius: 10px; /* All corners rounded */
+}
+
+#workspaces {
+    border: 2px solid #a89984;
+    border-radius: 5px; /* All corners rounded */
+    padding: 2px;
+
+}
+#workspaces button {
+    padding: 0 5px;
+    background-color: transparent;
+    color: #fbf1c7;
+    border: none;
+}
+
+#workspaces button:hover {
+    padding: 0 5px;
+    border: none;
+}
+
+#workspaces button.active {
+    background-color: #a89984;
+    color: #3c3836;
+    border-radius: 5px; /* All corners rounded */
+    border: none;
+}
+
+#workspaces button.urgent {
+    background-color: #cc241d;
+}
+
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#wireplumber,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#scratchpad,
+#idle_inhibitor,
+#keyboard-state,
+#mpd {
+    padding: 0 8px;
+    /*color: #3c3836;*/
+    border-radius: 5px; /* All corners rounded */
+    /*background-color: #a89984;*/
+    border: 2px solid #a89984;
+
+}
+
+
+/* If workspaces is the leftmost module, omit left margin */
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 0;
+}
+
+/* If workspaces is the rightmost module, omit right margin */
+.modules-right > widget:last-child > #workspaces {
+    margin-right: 0;
+}
+
+#clock {
+    background-color: transparent;
+    color: #fbf1c7;
+}
+
+#battery {
+
+}
+
+#battery.charging, #battery.plugged {
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
+}
+
+#battery.critical:not(.charging) {
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+label:focus {
+    background-color: #000000;
+}
+
+#cpu {
+}
+
+#memory {
+}
+
+#disk {
+}
+
+#backlight {
+    background-color: #90b1b1;
+}
+
+#network {
+}
+
+#network.disconnected {
+    background-color: #f53c3c;
+}
+
+#pulseaudio {
+}
+
+#pulseaudio.muted {
+    background-color: #90b1b1;
+    color: #2a5c45;
+}
+
+#wireplumber {
+    background-color: #fff0f5;
+    color: #000000;
+}
+
+#wireplumber.muted {
+    background-color: #f53c3c;
+}
+
+#custom-media {
+    min-width: 80px;
+}
+
+#custom-media.custom-spotify {
+    background-color: #66cc99;
+}
+
+#custom-media.custom-vlc {
+    background-color: #ffa000;
+}
+
+#temperature {
+}
+
+#temperature.critical {
+    background-color: #eb4d4b;
+}
+
+#tray {
+    background-color: transparent;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: #eb4d4b;
+}
+
+#idle_inhibitor {
+}
+
+#idle_inhibitor.activated {
+}
+
+#mpd {
+}
+
+#mpd.disconnected {
+}
+
+#mpd.stopped {
+}
+
+#mpd.paused {
+}
+
+#language {
+    background: #00b093;
+    color: #740864;
+    padding: 0 5px;
+    margin: 0 5px;
+    min-width: 16px;
+}
+
+#keyboard-state {
+}
+
+#keyboard-state > label {
+}
+
+#keyboard-state > label.locked {
+}
+
+#scratchpad {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#scratchpad.empty {
+	background-color: transparent;
+}
+
+#window {  /*the title window*/
+    border: 2px solid #a89984;
+    border-radius: 5px; /* All corners rounded */
+    padding: 2px;
+}
+

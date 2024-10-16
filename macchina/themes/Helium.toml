@@ -3,7 +3,7 @@
 
 hide_ascii = false
 prefer_small_ascii = true
-spacing = 2
+spacing = 0
 padding = 0
 separator = "-"
 key_color = "Yellow"
@@ -16,7 +16,7 @@ symbol_close = ")"
 visible = false
 
 [box]
-title = " Fedora 35 "
+title = " Fedora "
 visible = true
 
 [box.inner_margin]
@@ -24,8 +24,8 @@ x = 0
 y = 0
 
 [custom_ascii]
-color = "Blue"
-path = "/home/safwan/.config/macchina/ascii/fedoralinux.ascii"
+color = "#00F7F7"
+path = "/home/safwan/.config/macchina/ascii/fedora-simple.ascii"
 
 [randomize]
 key_color = false
@@ -48,5 +48,5 @@ machine = "Machine"
 local_ip = "IP"
 backlight = "Brightness"
 resolution = "Resolution"
-cpu_load = "CPU Load"
+#cpu_load = "CPU Load"
 cpu = "CPU"

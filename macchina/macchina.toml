@@ -19,6 +19,7 @@ current_shell = true
 #  theme should be uncommented and set to "Sodium"
 #
 theme = "Helium"
+# theme = "Hydrogen"
 
 # Displays only the specified readouts.
 # Accepted values (case-sensitive):
@@ -41,4 +42,4 @@ theme = "Helium"
 #   - Memory
 #   - Battery
 # Example:
-#   show = ["Battery", "Memory", ...]
+show = ["Host", "Machine", "Distribution", "Kernel", "Packages", "Terminal", "Uptime", "Shell", "Processor", "Memory"]

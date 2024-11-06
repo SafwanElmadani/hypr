@@ -116,10 +116,12 @@ alias alma='TERM=xterm-256color sshpass -f /home/safwan/.ssh/gsa ssh s4fw4n@9.11
 alias newcastle='TERM=xterm-256color sshpass -f /home/safwan/.ssh/newcastle ssh  safwan@9.11.234.81'
 alias newcastle_gsa='TERM=xterm-256color sshpass -f /home/safwan/.ssh/gsa ssh  s4fw4n@9.11.234.81 -X'
 
-#macchina-macos-x86_64I
+macchina
 #
 export CMVC_FAMILY=ymtstor@ymtstor.tucson.ibm.com@1704
 export CMVC_AUTH_METHOD=PW
-export PATH=$PATH:/usr/local/go/bin
+# export PATH=$PATH:/usr/local/go/bin
 # source ~/env/bin/activate
 export QT_QPA_PLATFORMTHEME=qt6ct
+
+export PATH=$PATH:/usr/local/go/bin

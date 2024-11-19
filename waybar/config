@@ -153,7 +153,7 @@
         "on-click": "pavucontrol"
     },
     "custom/media": {
-        "format": "{icon} {}",
+        "format": "{0} {1}",
         "escape": true,
         "return-type": "json",
         "max-length": 10,

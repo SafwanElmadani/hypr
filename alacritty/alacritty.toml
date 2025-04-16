@@ -28,7 +28,7 @@ style = { shape = "Block", blinking = "Always" }
 vi_mode_style = { shape = "Block", blinking = "Always" }
 
 [font]
-size = 14
+size = 10
 
 [font.bold]
 family = "JetBrainsMono NF SemiBold"

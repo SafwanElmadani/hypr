@@ -7,7 +7,7 @@ bold_font        JetBrainsMono NF Bold
 italic_font      JetBrainsMono NF SemiBold Italic
 bold_italic_font JetBrainsMono NF Bold Italic
 
-font_size 10.6
+font_size 14
 
 confirm_os_window_close 0
 
@@ -20,6 +20,6 @@ background_opacity 0.99
 
 
 # BEGIN_KITTY_THEME
-# Catppuccin-Latte
+# Gruvbox Dark
 include current-theme.conf
 # END_KITTY_THEME

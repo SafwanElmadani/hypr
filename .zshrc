@@ -125,3 +125,5 @@ export CMVC_AUTH_METHOD=PW
 export QT_QPA_PLATFORMTHEME=qt6ct
 
 export PATH=$PATH:/usr/local/go/bin
+alias docker-compose='docker compose'
+

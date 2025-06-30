@@ -105,7 +105,7 @@ alias ssh='TERM=xterm-256color ssh'
 
 
 alias tux11='TERM=xterm-256color sshpass -f /home/safwan/.ssh/gsa ssh  s4fw4n@tux11.tuc.stglabs.ibm.com -X'
-alias tux33i='TERM=xterm-256color sshpass -f /home/safwan/.ssh/gsa ssh  s4fw4n@tux33i.tuc.stglabs.ibm.com -X'
+alias tux33i='TERM=xterm-256color sshpass -f /home/safwan/.ssh/gsa ssh  s4fw4n@tux33i.tuc.stglabs.ibm.com -Y'
 alias tux34i='TERM=xterm-256color sshpass -f /home/safwan/.ssh/gsa ssh  s4fw4n@tux34i.tuc.stglabs.ibm.com -X'
 alias tux32i='TERM=xterm-256color sshpass -f /home/safwan/.ssh/gsa ssh  s4fw4n@tux32i.tuc.stglabs.ibm.com -X'
 alias tux31i='TERM=xterm-256color sshpass -f /home/safwan/.ssh/gsa ssh  s4fw4n@tux31i.tuc.stglabs.ibm.com -X'

@@ -1,2 +1,7 @@
 allow_images=true
 width= 40%
+height=60%
+# FULLSCREEN APP GRID
+insensitive=true
+cache_file=/dev/null
+

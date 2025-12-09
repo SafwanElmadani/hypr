@@ -9,6 +9,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="obraun"
+# ZSH_THEME="robbyrussell"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -72,6 +73,23 @@ ZSH_THEME="obraun"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git zsh-autosuggestions zsh-completions zsh-syntax-highlighting)
 
+# The plugin will auto execute this zvm_config function
+function zvm_config() {
+
+    ZVM_NORMAL_MODE_CURSOR=$ZVM_CURSOR_BLINKING_BLOCK
+    ZVM_INSERT_MODE_CURSOR=$ZVM_CURSOR_BLINKING_BLOCK
+      # Retrieve default cursor styles
+  local ncur=$(zvm_cursor_style $ZVM_NORMAL_MODE_CURSOR)
+  local icur=$(zvm_cursor_style $ZVM_INSERT_MODE_CURSOR)
+
+  # Append your custom color for your cursor
+  # Append real escape codes (note the $'...')
+  ZVM_INSERT_MODE_CURSOR=$icur$'\e]12;white\a'
+  ZVM_NORMAL_MODE_CURSOR=$ncur$'\e]12;#008800\a'
+}
+
+plugins+=(zsh-vi-mode)
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -99,6 +117,7 @@ export EDITOR=nvim
 #
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
+alias ls='lsd'
 alias ll="ls -ltrh --color=auto"
 export PATH="$PATH:/home/safwan/.local/bin"
 alias ssh='TERM=xterm-256color ssh'
@@ -116,7 +135,7 @@ alias alma='TERM=xterm-256color sshpass -f /home/safwan/.ssh/gsa ssh s4fw4n@9.11
 alias newcastle='TERM=xterm-256color sshpass -f /home/safwan/.ssh/newcastle ssh  safwan@9.11.234.81'
 alias newcastle_gsa='TERM=xterm-256color sshpass -f /home/safwan/.ssh/gsa ssh  s4fw4n@9.11.234.81 -X'
 
-macchina
+# macchina
 #
 export CMVC_FAMILY=ymtstor@ymtstor.tucson.ibm.com@1704
 export CMVC_AUTH_METHOD=PW
@@ -125,5 +144,24 @@ export CMVC_AUTH_METHOD=PW
 export QT_QPA_PLATFORMTHEME=qt6ct
 
 export PATH=$PATH:/usr/local/go/bin
-alias docker-compose='docker compose'
+# alias docker-compose='docker compose'
+#Bitwarden
+export BW_SESSION="VV4rU0DQm+P4snl1VSK1ZluIyQaw+UPBVOv+D03YuGWYcM/s4E9XNVCmyGv44Z6t9/I8dmo/zsivzqmy5sa68w=="
+# SSH agent setup
+export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
+eval "$(zoxide init zsh)"
+
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_STATE_HOME="$HOME/.local/state"
+
+## gh.tape stuff
+export PATH="$PATH:/home/safwan/.local/bin/devtools"
+export ghDB="$HOME/.local/bin/devtools/getghdb"
+
+# latex
+export PATH="$PATH:/usr/local/texlive/2025/bin/x86_64-linux"
+# for java programs
+export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true"
 

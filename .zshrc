@@ -143,25 +143,52 @@ export CMVC_AUTH_METHOD=PW
 # source ~/env/bin/activate
 export QT_QPA_PLATFORMTHEME=qt6ct
 
+export PATH="$PATH:/usr/local/bin"
+
 export PATH=$PATH:/usr/local/go/bin
 # alias docker-compose='docker compose'
 #Bitwarden
-export BW_SESSION="VV4rU0DQm+P4snl1VSK1ZluIyQaw+UPBVOv+D03YuGWYcM/s4E9XNVCmyGv44Z6t9/I8dmo/zsivzqmy5sa68w=="
+export BW_SESSION="YNl5hiavvRe2EeyHIcbn1Ekbwu9QpA/lPzWC6yqbsWiO/EsxE0fl3z7twtxOx7Q/d+H5EslFQlPVOZdnKhqihg=="
 # SSH agent setup
 export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
 eval "$(zoxide init zsh)"
 
 export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_CACHE_HOME="$HOME/.cache"
-export XDG_STATE_HOME="$HOME/.local/state"
+# export XDG_CONFIG_HOME="$HOME/.config"
+# export XDG_CACHE_HOME="$HOME/.cache"
+# export XDG_STATE_HOME="$HOME/.local/state"
 
 ## gh.tape stuff
 export PATH="$PATH:/home/safwan/.local/bin/devtools"
-export ghDB="$HOME/.local/bin/devtools/getghdb"
+export ghDB="$HOME/.local/bin/devtools/ghtapedb"
 
 # latex
 export PATH="$PATH:/usr/local/texlive/2025/bin/x86_64-linux"
 # for java programs
-export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true"
+# export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true"
+# export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on"
+export _JAVA_AWT_WM_NONREPARENTING=1
 
+
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export BOBSHELL_API_KEY=sk-_5XYjddUIo64TAvbGmr8PA
+
+# webassembly
+export PATH=$PATH:/home/safwan/Documents/emsdk
+export PATH=$PATH:/home/safwan/Documents/emsdk/upstream/emscripten
+
+unalias g
+
+# config for yazi
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	command yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
+# for lua pkg-config
+export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:${PKG_CONFIG_PATH}"

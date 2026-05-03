@@ -4,7 +4,7 @@
     "height": 30, // Waybar height (to be removed for auto height)
     "spacing": 4, // Gaps between modules (4px)
     "modules-left": ["hyprland/workspaces", "hyprland/window"],
-    "modules-right": ["custom/media", "idle_inhibitor", "pulseaudio", "disk", "memory", "cpu", "battery", "keyboard-state", "tray"],
+    "modules-right": ["custom/media", "idle_inhibitor", "pulseaudio", "custom/mute", "disk", "memory", "cpu", "battery", "keyboard-state", "tray"],
     "modules-center": ["clock"],
 
     // Modules configuration
@@ -152,6 +152,18 @@
         },
         "on-click": "pavucontrol"
     },
+    "custom/mute": {
+        "exec": "pactl get-sink-mute @DEFAULT_SINK@ | grep -q yes && echo '{\"text\":\"\",\"alt\":\"muted\",\"class\":\"muted\",\"tooltip\":\"Muted\"}' || echo '{\"text\":\"\",\"alt\":\"unmuted\",\"class\":\"unmuted\",\"tooltip\":\"Unmuted\"}'",
+        "return-type": "json",
+        "format": "{icon}",
+        "format-icons": {
+            "muted": "🔇",
+            "unmuted": "🔊"
+        },
+        "interval": 1,
+        "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle; pkill -RTMIN+8 waybar",
+        "signal": 8
+    },
     "custom/media": {
         "format": "{0} {1}",
         "escape": true,
@@ -162,7 +174,7 @@
         "smooth-scrolling-threshold": 2, // This value was tested using a trackpad, it should be lowered if using a mouse.
         "on-scroll-up": "playerctl next",
         "on-scroll-down": "playerctl previous",
-        "exec": "$HOME/.config/waybar/scripts/mediaplayer.py 2> /dev/null", // Script in resources/custom_modules folder
+        "exec": "uv run $HOME/.config/hypr/waybar/scripts/mediaplayer.py 2> /dev/null", // Script in resources/custom_modules folder
         }
     //}, {
     //"layer": "top",

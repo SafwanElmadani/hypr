@@ -1,14 +1,7 @@
 #!/bin/bash
 
-# Get the ID of the highest existing workspace
-LAST_WORKSPACE=$(hyprctl workspaces -j | jq 'map(.id) | max')
-
-# If no workspaces exist (unlikely), start at 1
-if [ "$LAST_WORKSPACE" == "null" ]; then
-    NEXT_WORKSPACE=1
-else
-    NEXT_WORKSPACE=$((LAST_WORKSPACE + 1))
-fi
+# Find the smallest positive workspace ID that is not currently in use
+NEXT_WORKSPACE=$(hyprctl workspaces -j | jq '[.[].id] as $ids | first(range(1; (($ids | max) // 0) + 2) | select(. as $n | $ids | index($n) | not))')
 
 # Dispatch to the new workspace
 hyprctl dispatch workspace $NEXT_WORKSPACE

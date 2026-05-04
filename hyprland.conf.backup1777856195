@@ -42,7 +42,7 @@
 # Execute your favorite apps at launch
 # exec-once = waybar & hyprpaper & firefox
 # exec-once = dunst
-# exec-once = kanshi -c /home/safwan/.config/hypr/kanshi/config
+exec-once = kanshi -c /home/safwan/.config/hypr/kanshi/config
 # exec-once=waybar -c ~/.config/hypr/waybar/config -s ~/.config/hypr/waybar/style.css
 exec-once = nm-applet
 # exec-once =/usr/libexec/kf5/polkit-kde-authentication-agent-1
@@ -308,5 +308,3 @@ bind = ALT,      Tab,   layoutmsg,  focus right
 # submap=passthrough
 # bind=,escape,submap,reset
 # submap=reset
-
-source = ./dms/outputs.conf

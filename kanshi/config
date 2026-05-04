@@ -1,0 +1,16 @@
+profile home_setup {
+	output "Philips Consumer Electronics Company PHL 271V8LB UK02439053050" mode 1920x1080@60 position 1080,0
+	output "Samsung Display Corp. 0x4164 Unknown" disable
+	output "Ancor Communications Inc VG248 J5LMQS169912" mode 1920x1080@60 position 3000,0
+	output "Sceptre Tech Inc Sceptre F27 0x01010101" mode 1920x1080@100 position 0,0 transform 270
+}
+
+profile laptop {
+	output "Samsung Display Corp. 0x4164 Unknown" enable mode 3840x2400@60 scale 2 position 0,0
+}
+
+profile lab_setup {
+	output "Samsung Display Corp. 0x4164 Unknown" disable
+	output "Ancor Communications Inc ASUS PB287Q 0x0001FDDD" mode 2560x1440 scale 1 position 0,0
+	output "Lenovo Group Limited T27h-30 V5MWX659" mode 2560x1440 scale 1 position -1440,0 transform 90
+}

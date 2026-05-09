@@ -192,3 +192,6 @@ function y() {
 }
 # for lua pkg-config
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:${PKG_CONFIG_PATH}"
+
+alias c="claude --dangerously-skip-permissions"
+alias b="bob"

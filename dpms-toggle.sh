@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
-hyprctl dispatch dpms off
+hyprctl dispatch 'hl.dsp.dpms({ action = "off" })'
 sleep 1
-hyprctl dispatch dpms on
+hyprctl dispatch 'hl.dsp.dpms({ action = "on" })'

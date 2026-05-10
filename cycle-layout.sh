@@ -11,7 +11,7 @@ mkdir -p "$STATE_DIR"
 # Read current layout for this workspace (default to dwindle on first run)
 CURRENT_LAYOUT=$(cat "$STATE_FILE" 2>/dev/null || echo "dwindle")
 
-# Cycle: dwindle -> master -> scrolling -> monocle -> dwindle
+# Cycle: dwindle -> master -> scrolling -> dwindle
 case "$CURRENT_LAYOUT" in
     "dwindle")
         NEXT="master"
@@ -21,11 +21,7 @@ case "$CURRENT_LAYOUT" in
         NEXT="scrolling"
         ICON="media-playlist-repeat"
         ;;
-    "scrolling")
-        NEXT="monocle"
-        ICON="view-fullscreen"
-        ;;
-    *) # monocle or unknown
+    *) # scrolling or unknown
         NEXT="dwindle"
         ICON="input-keyboard"
         ;;

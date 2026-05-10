@@ -87,7 +87,7 @@ hl.config({
 
         blur = {
             enabled  = true,
-            size     = 3,
+            size     = 6,
             passes   = 1,
             vibrancy = 0.1696,
         },
@@ -226,6 +226,16 @@ hl.config({
 hl.bind("switch:on:Lid Switch",  hl.dsp.exec_cmd('hyprctl keyword monitor "eDP-1, disable"'),               { locked = true })
 hl.bind("switch:off:Lid Switch", hl.dsp.exec_cmd('hyprctl keyword monitor "eDP-1, preferred, auto, 1"'),   { locked = true })
 
+
+----------------------
+---- window rules ----
+----------------------
+hl.window_rule({
+  match = {
+    class = "kitty"
+  },
+  opacity = "0.95 0.95",       -- "active inactive [fullscreen]"
+})
 
 ---------------------
 ---- KEYBINDINGS ----

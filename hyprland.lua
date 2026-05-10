@@ -8,13 +8,13 @@
 -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
 
 -- laptop
--- hl.monitor({ output = "desc:Samsung Display Corp. 0x4164", mode = "preferred", position = "auto", scale = 2 })
+hl.monitor({ output = "desc:Samsung Display Corp. 0x4164", mode = "preferred", position = "auto", scale = 2 })
 
 -- home setup
 hl.monitor({ output = "desc:Sceptre Tech Inc Sceptre F27 0x01010101",                        mode = "1920x1080@100", position = "0x0",    scale = 1, transform = 3 })
 hl.monitor({ output = "desc:Philips Consumer Electronics Company PHL 271V8LB UK02439053050", mode = "1920x1080@60",  position = "1080x0", scale = 1 })
 hl.monitor({ output = "desc:Ancor Communications Inc VG248 J5LMQS169912",                    mode = "1920x1080@60",  position = "3000x0", scale = 1 })
-hl.monitor({ output = "desc:Samsung Display Corp. 0x4164",                                   disabled = true })
+-- hl.monitor({ output = "desc:Samsung Display Corp. 0x4164",                                   disabled = true })
 
 -- lab
 -- hl.monitor({ output = "desc:Samsung Display Corp. 0x4164", disabled = true })
@@ -223,8 +223,8 @@ hl.config({
 ---- LID SWITCH ----
 ----------------------
 
-hl.bind("switch:on:Lid Switch",  hl.dsp.exec_cmd('hyprctl keyword monitor "eDP-1, disable"'),               { locked = true })
-hl.bind("switch:off:Lid Switch", hl.dsp.exec_cmd('hyprctl keyword monitor "eDP-1, preferred, auto, 1"'),   { locked = true })
+hl.bind("switch:off:Lid Switch", hl.dsp.exec_cmd("/home/safwan/.config/hypr/lid.sh open"),  { locked = true })
+hl.bind("switch:on:Lid Switch",  hl.dsp.exec_cmd("/home/safwan/.config/hypr/lid.sh close"), { locked = true })
 
 
 ----------------------

@@ -11,15 +11,15 @@
 hl.monitor({ output = "desc:Samsung Display Corp. 0x4164", mode = "preferred", position = "auto", scale = 2 })
 
 -- home setup
-hl.monitor({ output = "desc:Sceptre Tech Inc Sceptre F27 0x01010101",                        mode = "1920x1080@100", position = "0x0",    scale = 1, transform = 3 })
-hl.monitor({ output = "desc:Philips Consumer Electronics Company PHL 271V8LB UK02439053050", mode = "1920x1080@60",  position = "1080x0", scale = 1 })
-hl.monitor({ output = "desc:Ancor Communications Inc VG248 J5LMQS169912",                    mode = "1920x1080@60",  position = "3000x0", scale = 1 })
+-- hl.monitor({ output = "desc:Sceptre Tech Inc Sceptre F27 0x01010101",                        mode = "1920x1080@100", position = "0x0",    scale = 1, transform = 3 })
+-- hl.monitor({ output = "desc:Philips Consumer Electronics Company PHL 271V8LB UK02439053050", mode = "1920x1080@60",  position = "1080x0", scale = 1 })
+-- hl.monitor({ output = "desc:Ancor Communications Inc VG248 J5LMQS169912",                    mode = "1920x1080@60",  position = "3000x0", scale = 1 })
 -- hl.monitor({ output = "desc:Samsung Display Corp. 0x4164",                                   disabled = true })
 
 -- lab
 -- hl.monitor({ output = "desc:Samsung Display Corp. 0x4164", disabled = true })
-hl.monitor({ output = "desc:Ancor Communications Inc ASUS PB287Q 0x0001FDDD", mode = "2560x1440", position = "0x0",     scale = 1 })
-hl.monitor({ output = "desc:Lenovo Group Limited T27h-30 V5MWX659",           mode = "2560x1440", position = "-1440x0", scale = 1, transform = 1 })
+-- hl.monitor({ output = "desc:Ancor Communications Inc ASUS PB287Q 0x0001FDDD", mode = "2560x1440", position = "0x0",     scale = 1 })
+-- hl.monitor({ output = "desc:Lenovo Group Limited T27h-30 V5MWX659",           mode = "2560x1440", position = "-1440x0", scale = 1, transform = 1 })
 
 -- catch-all for random monitors
 hl.monitor({ output = "", mode = "preferred", position = "auto", scale = 1 })
@@ -49,6 +49,7 @@ hl.env("XCURSOR_SIZE",             "24")
 -- See https://wiki.hypr.land/Configuring/Basics/Autostart/
 
 hl.on("hyprland.start", function()
+    hl.exec_cmd("kanshi -c /home/safwan/.config/kanshi/config")
     hl.exec_cmd("nm-applet")
     hl.exec_cmd("/usr/libexec/kf6/polkit-kde-authentication-agent-1")
     hl.exec_cmd("copyq --start-server")

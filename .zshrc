@@ -174,7 +174,8 @@ export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-export BOBSHELL_API_KEY=sk-_5XYjddUIo64TAvbGmr8PA
+#export BOBSHELL_API_KEY=sk-_5XYjddUIo64TAvbGmr8PA
+export BOBSHELL_API_KEY=bob_prod_bob-apikey_44uQPdP5uePxzhXryKp3D1YzL7edouFUvmiHBx4mZUTnYkfmdxfEhKtuNpSPfwJDXgtcAUFRGxoLBThoZ9BGZgQh_G9WAwjFkpm4AJ6bdyCXD2zheyNv7ZrzDMEP89ukCYKD9
 
 # webassembly
 export PATH=$PATH:/home/safwan/Documents/emsdk
@@ -193,5 +194,10 @@ function y() {
 # for lua pkg-config
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:${PKG_CONFIG_PATH}"
 
+alias cnew="cd claude-conv && claude --dangerously-skip-permissions"
+alias cr="cd claude-conv && claude -r"
+alias cc="cd claude-conv && claude -c"
 alias c="claude --dangerously-skip-permissions"
 alias b="bob"
+
+export GH_HOST=github.ibm.com

@@ -55,7 +55,8 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("copyq --start-server")
     hl.exec_cmd("systemctl --user start hyprland-session.target")
     hl.exec_cmd("systemctl --user start xdg-desktop-portal-hyprland.service xdg-desktop-portal.service")
-    hl.exec_cmd("dms run")
+    -- hl.exec_cmd("dms run")
+    hl.exec_cmd("noctalia")
 end)
 
 
@@ -64,45 +65,76 @@ end)
 -----------------------
 
 -- Refer to https://wiki.hypr.land/Configuring/Basics/Variables/
+-- hl.config({
+--     general = {
+--         gaps_in     = 5,
+--         gaps_out    = 8,
+--         border_size = 2,
+--
+--         col = {
+--             active_border   = { colors = { "rgba(d65d0eff)", "rgba(d65d0eff)" }, angle = 0 },
+--             inactive_border = "rgba(595959aa)",
+--         },
+--
+--         layout = "scrolling",
+--     },
+--
+--     decoration = {
+--         rounding = 10,
+--         rounding_power = 2,
+--
+--         -- Change transparency of focused and unfocused windows
+--         active_opacity   = 1.0,
+--         inactive_opacity = 1.0,
+--
+--         blur = {
+--             enabled  = true,
+--             size     = 6,
+--             passes   = 1,
+--             vibrancy = 0.1696,
+--         },
+--         shadow = {
+--             enabled      = true,
+--             range        = 4,
+--             render_power = 3,
+--             color        = 0xee1a1a1a,
+--         },
+--     },
+--
+--     animations = {
+--         enabled = true,
+--     },
+-- })
+
 hl.config({
-    general = {
-        gaps_in     = 5,
-        gaps_out    = 8,
-        border_size = 2,
+  general = {
+    gaps_in = 5,
+    gaps_out = 8,
+    border_size = 2,
+    layout = "scrolling",
+  },
 
-        col = {
-            active_border   = { colors = { "rgba(d65d0eff)", "rgba(d65d0eff)" }, angle = 0 },
-            inactive_border = "rgba(595959aa)",
-        },
+  decoration = {
+    rounding = 20,
+    rounding_power = 2,
 
-        layout = "scrolling",
+    shadow = {
+      enabled = true,
+      range = 4,
+      render_power = 3,
+      color = 0xee1a1a1a,
     },
 
-    decoration = {
-        rounding = 10,
-        rounding_power = 2,
-
-        -- Change transparency of focused and unfocused windows
-        active_opacity   = 1.0,
-        inactive_opacity = 1.0,
-
-        blur = {
-            enabled  = true,
-            size     = 6,
-            passes   = 1,
-            vibrancy = 0.1696,
-        },
-        shadow = {
-            enabled      = true,
-            range        = 4,
-            render_power = 3,
-            color        = 0xee1a1a1a,
-        },
+    blur = {
+      enabled = true,
+      size = 3,
+      passes = 2,
+      vibrancy = 0.1696,
     },
-
-    animations = {
-        enabled = true,
-    },
+  },
+  animations = {
+      enabled = true,
+  },
 })
 
 -- Animation curves and animations
@@ -334,3 +366,6 @@ hl.bind(mainMod .. " + F",             hl.dsp.layout("colresize +conf"))
 hl.bind("ALT + Tab",                   hl.dsp.layout("focus right"))
 hl.bind(mainMod .. " + bracketleft",   hl.dsp.layout("consume"))
 hl.bind(mainMod .. " + bracketright",  hl.dsp.layout("expel"))
+
+-- For Noctalia Color templates
+require("noctalia")

@@ -55,8 +55,8 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("copyq --start-server")
     hl.exec_cmd("systemctl --user start hyprland-session.target")
     hl.exec_cmd("systemctl --user start xdg-desktop-portal-hyprland.service xdg-desktop-portal.service")
-    -- hl.exec_cmd("dms run")
-    hl.exec_cmd("noctalia")
+    hl.exec_cmd("dms run")
+    -- hl.exec_cmd("noctalia")
 end)
 
 
@@ -188,6 +188,7 @@ hl.config({
 hl.config({
     misc = {
         disable_hyprland_logo = true,
+        focus_on_activate     = true,
     },
 })
 
@@ -224,7 +225,8 @@ hl.device({
 hl.device({
     name      = "wacom-one-by-wacom-m-pen",
     transform = 0,
-    output    = "desc:Philips Consumer Electronics Company PHL 271V8LB UK02439053050",
+    -- output    = "desc:Philips Consumer Electronics Company PHL 271V8LB UK02439053050",
+    output    = "DP-4",
 })
 
 -----------------
@@ -256,8 +258,8 @@ hl.config({
 ---- LID SWITCH ----
 ----------------------
 
-hl.bind("switch:off:Lid Switch", hl.dsp.exec_cmd("/home/safwan/.config/hypr/lid.sh open"),  { locked = true })
-hl.bind("switch:on:Lid Switch",  hl.dsp.exec_cmd("/home/safwan/.config/hypr/lid.sh close"), { locked = true })
+-- hl.bind("switch:off:Lid Switch", hl.dsp.exec_cmd("/home/safwan/.config/hypr/lid.sh open"),  { locked = true })
+-- hl.bind("switch:on:Lid Switch",  hl.dsp.exec_cmd("/home/safwan/.config/hypr/lid.sh close"), { locked = true })
 
 
 ----------------------
@@ -364,8 +366,16 @@ hl.bind(mainMod .. " + SHIFT + right", hl.dsp.layout("swapcol r"))
 hl.bind(mainMod .. " + SHIFT + left",  hl.dsp.layout("swapcol l"))
 hl.bind(mainMod .. " + F",             hl.dsp.layout("colresize +conf"))
 hl.bind("ALT + Tab",                   hl.dsp.layout("focus right"))
-hl.bind(mainMod .. " + bracketleft",   hl.dsp.layout("consume"))
-hl.bind(mainMod .. " + bracketright",  hl.dsp.layout("expel"))
+-- hl.bind(mainMod .. " + bracketright",  hl.dsp.layout("expel"))
+-- hl.bind(mainMod .. " + bracketleft",   hl.dsp.layout("consume"))
+
+hl.bind(mainMod .. " + bracketleft",   hl.dsp.layout("consume_or_expel prev"))
+hl.bind(mainMod .. " + bracketright",  hl.dsp.layout("consume_or_expel next"))
 
 -- For Noctalia Color templates
-require("noctalia")
+-- require("noctalia")
+--
+-- Dankshell
+require("dms.colors")
+require("dms.windowrules")
+require("dms.layout")

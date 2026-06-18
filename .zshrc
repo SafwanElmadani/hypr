@@ -201,3 +201,8 @@ alias c="claude --dangerously-skip-permissions"
 alias b="bob"
 
 export GH_HOST=github.ibm.com
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/home/safwan/.lmstudio/bin"
+# End of LM Studio CLI section
+

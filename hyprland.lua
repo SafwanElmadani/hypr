@@ -144,12 +144,12 @@ hl.curve("linear",         { type = "bezier", points = { {0, 0},       {1, 1}   
 hl.curve("almostLinear",   { type = "bezier", points = { {0.5, 0.5},   {0.75, 1}    } })
 hl.curve("quick",          { type = "bezier", points = { {0.15, 0},    {0.1, 1}     } })
 
-hl.animation({ leaf = "windows",     enabled = true, speed = 7,  bezier = "quick" })
+hl.animation({ leaf = "windows",     enabled = true, speed = 10,  bezier = "easeOutQuint" })
 hl.animation({ leaf = "windowsOut",  enabled = true, speed = 7,  bezier = "default",  style = "popin 80%" })
 hl.animation({ leaf = "border",      enabled = true, speed = 10, bezier = "default" })
 hl.animation({ leaf = "borderangle", enabled = true, speed = 8,  bezier = "default" })
 hl.animation({ leaf = "fade",        enabled = true, speed = 7,  bezier = "default" })
-hl.animation({ leaf = "workspaces",  enabled = true, speed = 5,  bezier = "easeInOutCubic",  style = "slidevert" })
+hl.animation({ leaf = "workspaces",  enabled = true, speed = 10,  bezier = "easeOutQuint",  style = "slidevert" })
 
 -- See https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/ for more
 hl.config({
@@ -209,7 +209,7 @@ hl.config({
         sensitivity  = 0,
 
         touchpad = {
-            natural_scroll = false,
+            natural_scroll = ture,
         },
     },
 })
@@ -228,6 +228,16 @@ hl.device({
     -- output    = "desc:Philips Consumer Electronics Company PHL 271V8LB UK02439053050",
     output    = "DP-4",
 })
+
+-----------------
+---- GESTURES ----
+-----------------
+
+-- 3 fingers up/down: change workspace (built-in 1:1 swipe)
+hl.gesture({ fingers = 3, direction = "vertical", action = "workspace" })
+
+-- 3 fingers left/right: scroll through columns (scrolling layout)
+hl.gesture({ fingers = 3, direction = "horizontal", action = "scroll_move" })
 
 -----------------
 ---- BINDS ----

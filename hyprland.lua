@@ -5,10 +5,13 @@
 ---- MONITORS ----
 ------------------
 
+-- disabled: kanshi manages monitors for now (the event hooks here loop on dms restart)
+local monitors = require("scripts.monitors_layout")
+
 -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
 
 -- laptop
-hl.monitor({ output = "desc:Samsung Display Corp. 0x4164", mode = "preferred", position = "auto", scale = 2 })
+-- hl.monitor({ output = "desc:Samsung Display Corp. 0x4164", mode = "preferred", position = "auto", scale = 2 })
 
 -- home setup
 -- hl.monitor({ output = "desc:Sceptre Tech Inc Sceptre F27 0x01010101",                        mode = "1920x1080@100", position = "0x0",    scale = 1, transform = 3 })
@@ -22,7 +25,7 @@ hl.monitor({ output = "desc:Samsung Display Corp. 0x4164", mode = "preferred", p
 -- hl.monitor({ output = "desc:Lenovo Group Limited T27h-30 V5MWX659",           mode = "2560x1440", position = "-1440x0", scale = 1, transform = 1 })
 
 -- catch-all for random monitors
-hl.monitor({ output = "", mode = "preferred", position = "auto", scale = 1 })
+-- hl.monitor({ output = "", mode = "preferred", position = "auto", scale = 1 })
 
 
 -------------------------------
@@ -175,7 +178,7 @@ hl.config({
         explicit_column_widths   = "0.5, 1.0",
         fullscreen_on_one_column = true,
         focus_fit_method         = 1, 
-        follow_focus             = ture,
+        follow_focus             = true,
         follow_min_visible       =  1.0,
     },
 })
@@ -209,7 +212,8 @@ hl.config({
         sensitivity  = 0,
 
         touchpad = {
-            natural_scroll = ture,
+            natural_scroll = true,
+            disable_while_typing = false,
         },
     },
 })
@@ -268,8 +272,23 @@ hl.config({
 ---- LID SWITCH ----
 ----------------------
 
--- hl.bind("switch:off:Lid Switch", hl.dsp.exec_cmd("/home/safwan/.config/hypr/lid.sh open"),  { locked = true })
--- hl.bind("switch:on:Lid Switch",  hl.dsp.exec_cmd("/home/safwan/.config/hypr/lid.sh close"), { locked = true })
+function disableLaptopMonitor()
+    hl.exec_cmd("notify-send 'lid' 'close fired -> disabling eDP-1'")
+    hl.monitor({
+        output = monitors.laptopMonitor.output,
+        disabled = true,
+    })
+end
+
+function enableLaptopMonitor()
+    hl.exec_cmd("notify-send 'lid' 'open fired -> enabling eDP-1'")
+    hl.monitor(monitors.laptopMonitor)
+    os.execute("hyprctl reload")
+end
+-- close lid
+hl.bind("switch:on:Lid Switch", disableLaptopMonitor, { locked = true })
+-- open lid
+hl.bind("switch:off:Lid Switch", enableLaptopMonitor, { locked = true })
 
 
 ----------------------
@@ -293,6 +312,9 @@ hl.bind("ALT + RETURN",           hl.dsp.exec_cmd("ghostty"))
 hl.bind(mainMod .. " + RETURN",   hl.dsp.exec_cmd("kitty"))
 hl.bind("CTRL + ALT + T",         hl.dsp.exec_cmd("Thunar"))
 hl.bind(mainMod .. " + m",        hl.dsp.exec_cmd("wofi --show drun"))
+
+-- Notify focused window title
+hl.bind(mainMod .. " + I",        hl.dsp.exec_cmd("notify-send 'Window title' \"$(hyprctl activewindow -j | jq -r .title)\""))
 hl.bind(mainMod .. " + B",        hl.dsp.exec_cmd("pkill waybar || waybar -c /home/safwan/.config/hypr/waybar/config -s /home/safwan/.config/hypr/waybar/style.css &"))
 
 -- Window management
@@ -334,8 +356,8 @@ for i = 1, 10 do
 end
 
 -- Scroll through workspaces on current monitor with mainMod + scroll
-hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "m-1" }))
-hl.bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "m+1" }))
+hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "m+1" }))
+hl.bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "m-1" }))
 
 -- Switch workspaces on current monitor
 hl.bind(mainMod .. " + L",    hl.dsp.focus({ workspace = "m+1" }))
@@ -362,7 +384,10 @@ end)
 -- Screenshot / lock / scripts
 hl.bind("CTRL + ALT + F", hl.dsp.exec_cmd('grim -g "$(slurp -d)" - | swappy -f -'))
 hl.bind("CTRL + ALT + L", hl.dsp.exec_cmd("hyprlock"))
-hl.bind("CTRL + ALT + N", hl.dsp.exec_cmd("/home/safwan/.config/hypr/cycle-layout.sh"))
+-- hl.bind("CTRL + ALT + N", hl.dsp.exec_cmd("/home/safwan/.config/hypr/cycle-layout.sh"))
+require("scripts.cycle_layout")
+require("scripts.glass_magnifier")
+require("scripts.order_workspace")
 hl.bind(mainMod .. " + O", hl.dsp.exec_cmd("/home/safwan/.config/hypr/dpms-toggle.sh"))
 
 -- Switch layout of current workspace

@@ -1,0 +1,120 @@
+-- order_workspace.lua
+-- Keeps workspaces numbered in ascending order with no gaps:
+-- occupied workspaces get 1..N in their current order, and empty
+-- "placeholder" workspaces (a monitor's active workspace is never
+-- destroyed, even when empty) are pushed to the end instead of
+-- squatting in the middle of the sequence.
+--
+-- Trigger: "workspace.removed" fires when an empty, unfocused workspace
+-- is cleaned up by the compositor. change_id only emits idChanged, not
+-- created/removed, so compacting never re-triggers this handler.
+
+local function is_empty(ws)
+    local wins = hl.get_workspace_windows(tostring(ws.id))
+    return not wins or #wins == 0
+end
+
+local function compact_workspaces(removed)
+    local workspaces = hl.get_workspaces()
+    if not workspaces then
+        return
+    end
+
+    -- the workspace being destroyed may still be in the list mid-event
+    local removed_id = removed and removed.id or nil
+
+    local occupied     = {} -- workspaces with windows, in id order
+    local placeholders = {} -- empty but alive (active on some monitor)
+    local taken        = {} -- ids we must not assign (persistent workspaces)
+    local max_id       = 0
+
+    for _, ws in ipairs(workspaces) do
+        if ws.id > 0 and not ws.special and ws.id ~= removed_id then
+            max_id = math.max(max_id, ws.id)
+
+            if ws.persistent or ws.is_persistent then
+                -- leave persistent workspaces alone; renumbering them would
+                -- fight their workspace rule, which would just recreate them
+                taken[ws.id] = true
+            elseif is_empty(ws) then
+                table.insert(placeholders, ws)
+            else
+                table.insert(occupied, ws)
+            end
+        end
+    end
+
+    local by_id = function(a, b)
+        return a.id < b.id
+    end
+    table.sort(occupied, by_id)
+    table.sort(placeholders, by_id)
+
+    -- desired order: occupied first, empty placeholders at the end
+    local ordered = {}
+    for _, ws in ipairs(occupied) do
+        table.insert(ordered, ws)
+    end
+    for _, ws in ipairs(placeholders) do
+        table.insert(ordered, ws)
+    end
+
+    -- plan the moves against the lowest free slots
+    local moves   = {}
+    local next_id = 1
+    for _, ws in ipairs(ordered) do
+        while taken[next_id] do
+            next_id = next_id + 1
+        end
+
+        if ws.id ~= next_id then
+            table.insert(moves, { from = ws.id, to = next_id, name = ws.name })
+        end
+
+        next_id = next_id + 1
+    end
+
+    if #moves == 0 then
+        return
+    end
+
+    -- Two-phase renumber: park every mover on a temporary id first, so a
+    -- placeholder holding a low id can't collide with an occupied
+    -- workspace moving down (change_id refuses taken ids).
+    local temp = max_id + 1000
+
+    for i, m in ipairs(moves) do
+        hl.dispatch(hl.dsp.workspace.change_id({
+            workspace = tostring(m.from),
+            id        = temp + i,
+        }))
+    end
+
+    for i, m in ipairs(moves) do
+        hl.dispatch(hl.dsp.workspace.change_id({
+            workspace = tostring(temp + i),
+            id        = m.to,
+        }))
+
+        -- change_id skips auto-naming workspaces it considers manually
+        -- renamed (and our own renames mark them as such), so keep
+        -- default-numbered names in sync ourselves. Custom names are
+        -- left untouched.
+        if m.name == tostring(m.from) then
+            hl.dispatch(hl.dsp.workspace.rename({
+                workspace = tostring(m.to),
+                name      = tostring(m.to),
+            }))
+        end
+    end
+end
+
+-- an empty workspace that loses focus gets destroyed by Hyprland,
+-- which is the moment a gap appears in the numbering
+hl.on("workspace.removed", compact_workspaces)
+
+-- tidy up leftover gaps on startup and after a config reload
+hl.on("hyprland.start", compact_workspaces)
+hl.on("config.reloaded", function()
+    compact_workspaces()
+end)

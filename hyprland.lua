@@ -229,8 +229,7 @@ hl.device({
 hl.device({
     name      = "wacom-one-by-wacom-m-pen",
     transform = 0,
-    -- output    = "desc:Philips Consumer Electronics Company PHL 271V8LB UK02439053050",
-    output    = "DP-4",
+    output    = "desc:Philips Consumer Electronics Company PHL 271V8LB UK02439053050",
 })
 
 -----------------

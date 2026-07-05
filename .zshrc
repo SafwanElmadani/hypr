@@ -205,4 +205,12 @@ export GH_HOST=github.ibm.com
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:/home/safwan/.lmstudio/bin"
 # End of LM Studio CLI section
+# in ~/.zshrc
+alias lazypodman='DOCKER_HOST=unix://$XDG_RUNTIME_DIR/podman/podman.sock lazydocker'
 
+# bun completions
+[ -s "/home/safwan/.oh-my-zsh/completions/_bun" ] && source "/home/safwan/.oh-my-zsh/completions/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

@@ -388,6 +388,7 @@ hl.bind("CTRL + ALT + L", hl.dsp.exec_cmd("hyprlock"))
 require("scripts.cycle_layout")
 require("scripts.glass_magnifier")
 require("scripts.order_workspace")
+require("scripts.window_2_new_workspace")
 hl.bind(mainMod .. " + O", hl.dsp.exec_cmd("/home/safwan/.config/hypr/dpms-toggle.sh"))
 
 -- Switch layout of current workspace
